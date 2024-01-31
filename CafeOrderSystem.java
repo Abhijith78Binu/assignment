@@ -121,6 +121,7 @@ public class CafeOrderSystem {
         "Sam",   // Staff for Table 7
         "Jill"   // Staff for Table 8
     };
+    private static boolean[] tableStatus = new boolean[9]; // Array to track table status (0-8)
 
    // Main method - entry point of the program.
     public static void main(String[] args) { // The main method, which is the entry point of the program. It accepts an array of strings as arguments from the command line.
@@ -172,6 +173,15 @@ private static void placeOrder(Scanner scanner) {
         return;  //Exit when invalid
     }
     
+    if (!tableStatus[tableNumber]) {
+        // Table is free
+        System.out.println("Table " + tableNumber + " is free. You can place an order.");
+    } else {
+        // Table is occupied
+        System.out.println("Table " + tableNumber + " is already occupied. Please choose another table.");
+        return;
+    }
+
     boolean addingItems = true; //control the loop for adding items to the order
      
     while (addingItems && orderCount < orders.length) { // Loop to add items to the order until the user decides to finish or the order array is full
